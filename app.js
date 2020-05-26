@@ -10,7 +10,6 @@ var express     = require("express"),
     User        = require("./models/user"),
     seedDB      = require("./seeds"),
     flash       = require("connect-flash")
-    
 //requring routes
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
@@ -42,11 +41,10 @@ app.use(function(req, res, next){
    res.locals.success = req.flash("success");
    next();
 });
-
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+app.listen(process.env.PORT, process.env.HOSTNAME, function(){
+   console.log("The YelpCamp Server Has Started!",process.env.PORT);
 });

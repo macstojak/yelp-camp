@@ -1,5 +1,6 @@
 var express=require("express"),
     router = express.Router();
+    mongoose = require("mongoose");
 var Campground = require("../models/campground"),
     middleware = require("../middleware");
 
@@ -17,24 +18,32 @@ router.get("/", function(req, res){
 });
 
 //ADD NEW
-router.get("/new", middleware.isLoggedIn, function(req, res){
+router.get("/new", 
+middleware.isLoggedIn, 
+function(req, res){
    res.render("campgrounds/new");
 });
 
 //CREATE - Add new campground to database
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", 
+middleware.isLoggedIn, 
+function(req, res){
+    let id, username;
+    req.user===undefined?id=mongoose.Types.ObjectId():id=req.user._id;
+    req.user===undefined? username="Anonymous": username=req.user.username;
+    
    var name = req.body.name;
    var image = req.body.image;
    var desc = req.body.description;
    var price = req.body.price
    var author = {
-       id: req.user._id,
-       username: req.user.username
+       id: id,
+       username: username
    }
    var newCamp = {name: name, price: price, image: image, description: desc, author: author};
    Campground.create(newCamp, function(err, campground){
        if(err){
-           console.log("Error ocurred");
+           console.log("Error ocurred", err);
        }
        else{
            console.log(campground)

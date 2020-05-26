@@ -1,5 +1,6 @@
 var express = require("express"),
-    router = express.Router({mergeParams: true});
+    router = express.Router({mergeParams: true}),
+    mongoose = require("mongoose");
 var Campground = require("../models/campground"),
     Comment = require("../models/comment"),
     middleware = require("../middleware");
@@ -8,7 +9,9 @@ var Campground = require("../models/campground"),
 //================
 
 //COMMENT NEW 
-router.get("/new", middleware.isLoggedIn, function(req, res){
+router.get("/new", 
+// middleware.isLoggedIn, 
+function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -20,7 +23,9 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 });
 
 //COMMENT CREATE
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", 
+// middleware.isLoggedIn,
+ function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -33,8 +38,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     res.redirect("/campgrounds");
                }else{
                    //add username and id to the comment
-                   comment.author.id = req.user._id;
-                   comment.author.username = req.user.username;
+                   let id, username;
+                   req.user===undefined?id=mongoose.Types.ObjectId():id=req.user._id;
+                   req.user===undefined?username="Anonymous": username=req.user.username;
+                   comment.author.id = id;
+                   comment.author.username = username;
                    //save comment
                    comment.save();
                    campground.comments.push(comment);

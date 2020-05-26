@@ -1,5 +1,6 @@
 body{
     background-color: #000;
+    font-family: 'Averia Serif Libre', cursive;
 }
 
 #landing-header{
@@ -10,6 +11,7 @@ body{
 }
 #landing-header h1{
     color: white;
+    font-family: 'Cabin Sketch', cursive;
 }
 .slideshow{
     position: fixed;

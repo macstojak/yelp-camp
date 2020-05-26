@@ -1,3 +1,4 @@
+
 .thumbnail img{
     width: 100%;
 }
@@ -10,4 +11,64 @@ padding: 10px;
 }
 .delete-form{
     display: inline;
+}
+
+.jumbotron{
+ 
+    background-image: url("https://image.freepik.com/free-photo/panorama-steep-peak-mountains-with-covered-snow-yellow-tent_49071-1051.jpg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+
+}
+.jumbotron a{
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+}
+.jumbotron h1, .jumbotron p{
+    background-color: rgba(98, 191, 72,0.5);
+   color: white;
+   text-align: center;
+    filter: contrast(1);
+}
+.navbar-custom {
+    background-color: darkgreen;
+    color: white;
+    font-weight: 700;
+    font-family: 'Cabin Sketch', cursive;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-brand > a:hover{
+    color: white;
+}
+.navbar-custom .navbar-nav > .active > a {
+    color: #ffffff;
+    background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+    text-decoration: none;
+    background-color: #33aa33;
+    color: white;
+}
+
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+.navbar-custom .navbar-toggle {
+    background-color:#eeeeee;
+}
+.navbar-custom .icon-bar {
+    background-color:#33aa33;
+}
+body{
+    font-family: 'Comfortaa', cursive;
 }
