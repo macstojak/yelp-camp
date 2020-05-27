@@ -15,11 +15,16 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index")
     
-    const databaseUri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp_v12';
+   
 
-    mongoose.connect(databaseUri, { useMongoClient: true })
-          .then(() => console.log(`Database connected`))
-          .catch(err => console.log(`Database connection error: ${err.message}`));
+    const MongoClient = require('mongodb').MongoClient;
+    const uri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp_v12';
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect(err => {
+      const collection = client.db("test").collection("devices");
+      // perform actions on the collection object
+      client.close();
+    });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -50,6 +55,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP,function(){
+app.listen(process.env.PORT,function(){
    console.log("The YelpCamp Server Has Started!");
 });
