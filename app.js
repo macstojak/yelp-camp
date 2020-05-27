@@ -17,14 +17,13 @@ var commentRoutes    = require("./routes/comments"),
     
    
 
-    const MongoClient = require('mongodb').MongoClient;
-    const uri = process.env.DATABASEURL || 'mongodb://localhost/yelp_camp_v12';
-    const client = new MongoClient(uri, { useNewUrlParser: true });
-    client.connect(err => {
-      const collection = client.db("test").collection("devices");
-      // perform actions on the collection object
-      client.close();
-    });
+    var MongoClient = require('mongodb').MongoClient;
+const uri = process.env.DATABASEURL;
+MongoClient.connect(uri, function(err, client) {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
