@@ -12,6 +12,8 @@ router.get("/", function(req, res){
             console.log(err);
         }
         else{
+            let campgrounds;
+            allCampgrounds===undefined?campgrounds=[]:campgrounds=allCampgrounds;
             res.render("campgrounds/index", {campground: allCampgrounds});
         }
     });
